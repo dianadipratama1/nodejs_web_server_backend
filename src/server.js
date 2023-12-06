@@ -9,7 +9,7 @@ const server = http.createServer((req, res) => {
 
   if (method === 'GET' && reqUrl === '/books') {
     // Menampilkan seluruh buku
-    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
     res.end(JSON.stringify({
       status: 'success',
       data: {
@@ -31,13 +31,13 @@ const server = http.createServer((req, res) => {
         } = data;
 
         if (!name) {
-          res.writeHead(400, { 'Content-Type': 'application/json' });
+          res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
           res.end(JSON.stringify({
             status: 'fail',
             message: 'Gagal menambahkan buku. Mohon isi nama buku',
           }));
         } else if (readPage > pageCount) {
-          res.writeHead(400, { 'Content-Type': 'application/json' });
+          res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
           res.end(JSON.stringify({
             status: 'fail',
             message: 'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount',
@@ -54,7 +54,7 @@ const server = http.createServer((req, res) => {
 
           books.push(newBook);
 
-          res.writeHead(201, { 'Content-Type': 'application/json' });
+          res.writeHead(201, { 'Content-Type': 'application/json; charset=utf-8' });
           res.end(JSON.stringify({
             status: 'success',
             message: 'Buku berhasil ditambahkan',
@@ -64,7 +64,7 @@ const server = http.createServer((req, res) => {
           }));
         }
       } catch (error) {
-        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
         res.end(JSON.stringify({
           status: 'fail',
           message: 'Gagal menambahkan buku. Format JSON tidak valid',
@@ -77,7 +77,7 @@ const server = http.createServer((req, res) => {
     const book = books.find((b) => b.id === bookId);
 
     if (book) {
-      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({
         status: 'success',
         data: {
@@ -85,7 +85,7 @@ const server = http.createServer((req, res) => {
         },
       }));
     } else {
-      res.writeHead(404, { 'Content-Type': 'application/json' });
+      res.writeHead(404, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({
         status: 'fail',
         message: 'Buku tidak ditemukan',
@@ -108,13 +108,13 @@ const server = http.createServer((req, res) => {
           const { name, pageCount, readPage } = data;
 
           if (!name) {
-            res.writeHead(400, { 'Content-Type': 'application/json' });
+            res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
             res.end(JSON.stringify({
               status: 'fail',
               message: 'Gagal memperbarui buku. Mohon isi nama buku',
             }));
           } else if (readPage > pageCount) {
-            res.writeHead(400, { 'Content-Type': 'application/json' });
+            res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
             res.end(JSON.stringify({
               status: 'fail',
               message: 'Gagal memperbarui buku. readPage tidak boleh lebih besar dari pageCount',
@@ -127,14 +127,14 @@ const server = http.createServer((req, res) => {
               updatedAt: new Date().toISOString(),
             };
 
-            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
             res.end(JSON.stringify({
               status: 'success',
               message: 'Buku berhasil diperbarui',
             }));
           }
         } catch (error) {
-          res.writeHead(400, { 'Content-Type': 'application/json' });
+          res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
           res.end(JSON.stringify({
             status: 'fail',
             message: 'Gagal memperbarui buku. Format JSON tidak valid',
@@ -142,7 +142,7 @@ const server = http.createServer((req, res) => {
         }
       });
     } else {
-      res.writeHead(404, { 'Content-Type': 'application/json' });
+      res.writeHead(404, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({
         status: 'fail',
         message: 'Gagal memperbarui buku. Id tidak ditemukan',
@@ -155,13 +155,13 @@ const server = http.createServer((req, res) => {
 
     if (bookIndex !== -1) {
       books.splice(bookIndex, 1);
-      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({
         status: 'success',
         message: 'Buku berhasil dihapus',
       }));
     } else {
-      res.writeHead(404, { 'Content-Type': 'application/json' });
+      res.writeHead(404, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({
         status: 'fail',
         message: 'Buku gagal dihapus. Id tidak ditemukan',
@@ -169,7 +169,7 @@ const server = http.createServer((req, res) => {
     }
   } else {
     // Route tidak ditemukan
-    res.writeHead(404, { 'Content-Type': 'application/json' });
+    res.writeHead(404, { 'Content-Type': 'application/json; charset=utf-8' });
     res.end(JSON.stringify({
       status: 'fail',
       message: 'Route tidak ditemukan',
